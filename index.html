@@ -59,8 +59,40 @@
 
             let saldo = salarioMensal - alimentacao;
             alert("Seu saldo final é R$ " + saldo.toFixed(2) + ". ");
-            
+
         }
+    </script>
+
+    <script>
+
+        let modelo = prompt("Informe o modelo do veículo:");
+
+        let placa = prompt("Informe a placa do veículo:");
+
+        let tipoCombustivel = prompt("Informe o tipo de combustível (ETANOL ou GASOLINA):");
+
+        let valorLitro = parseFloat(prompt("Informe o valor do litro (em R$):").replace(",", "."));
+
+        let qtdLitros = parseFloat(prompt("Informe a quantidade de litros abastecida:").replace(",", "."));
+
+        let valorTotal = valorLitro * qtdLitros;
+
+        let imposto = valorTotal * 0.25;
+        
+        let agora = new Date();
+
+        let dataHoraFormatada = agora.toLocaleString("pt-BR");
+
+        let relatorio = "******** RELATÓRIO DE ABASTECIMENTO ********\n\n" +
+            "Data e Hora do abastecimento: " + dataHoraFormatada + "\n" +
+            "Modelo do Veículo: " + modelo + "\n" +
+            "Placa do Veículo: " + placa + "\n" +
+            "Tipo do Combustível: " + tipoCombustivel.toUpperCase() + "\n" +
+            "Valor do Litro: R$ " + valorLitro.toFixed(2) + "\n" +
+            "Quantidade de litros abastecidos: " + qtdLitros.toFixed(2) + " L\n" +
+            "Valor Total a Pagar: R$ " + valorTotal.toFixed(2) + "\n\n" +
+            "Observação: Valor do Imposto (25%): R$ " + imposto.toFixed(2);
+        alert(relatorio);
     </script>
 </body>
 </html>
