@@ -1,76 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Comprovante de Abastecimento</title>
 </head>
 <body>
-    <script>
-        let a = 50000000, b = 50, c = 10, d = 20, e = 30;
 
-            document.write("Soma: " + (a + b + c + d + e) + "<br>");
-            document.write("Subtração: " + (a - b - c - d - e) + "<br>");
-            document.write("Multiplicação: " + (a * b * c * d * e) + "<br>");
-            document.write("Divisão: " + (a / b / c / d / e) + "<br>");
-            document.write("Resto: " + (a % b % c % d % e) + "<br>");
-            document.write("Potência: " + (a ** b ** c ** d ** e) + "<br>");
+    <div class="receipt-card">
+        <div class="receipt-header">
+            <h1>Relatório de Abastecimento</h1>
+            <p>Posto de Combustíveis</p>
+        </div>
+        
+        <div class="receipt-body">
+            <div class="info-group">
+                <span class="label">Data e Hora:</span>
+                <span class="value" id="dataHora">-</span>
+            </div>
+            <div class="info-group">
+                <span class="label">Modelo:</span>
+                <span class="value" id="modelo">-</span>
+            </div>
+            <div class="info-group">
+                <span class="label">Placa:</span>
+                <span class="value" id="placa">-</span>
+            </div>
+            <div class="info-group">
+                <span class="label">Combustível:</span>
+                <span class="value" id="combustivel">-</span>
+            </div>
+            <div class="info-group">
+                <span class="label">Valor do Litro:</span>
+                <span class="value" id="valorLitro">-</span>
+            </div>
+            <div class="info-group">
+                <span class="label">Quantidade:</span>
+                <span class="value" id="qtdLitros">-</span>
+            </div>
 
-    </script>
-    <h2> Primeiro Contato com JavaScript</h2>
+            <div class="total-box">
+                <div class="total-row">
+                    <span class="total-label">Total a Pagar:</span>
+                    <span class="total-value" id="valorTotal">-</span>
+                </div>
+                <div class="tax-note" id="imposto">
+                    Observação: Valor do Imposto (25%): R$ 0,00
+                </div>
+            </div>
+        </div>
 
-    <button onclick="Informacao()">Clique aqui</button>
-
-    <script>
-        function Informacao() {
-            let nome = prompt("Digite seu nome: ");
-            alert("Bem-Vindo, " + nome + "!");
-
-            let idade = prompt("Digite sua idade: ");
-            alert("Você tem " + idade + " anos.");
-
-            let curso = prompt("Digite seu curso: ");
-            alert("Seu curso é " + curso + ".");
-
-            let cidade = prompt("Digite sua cidade: ");
-            alert("Você mora em " + cidade + ".");
-
-            let hobby = prompt("Digite seu hobby favorito: ");
-            alert("Seu hobby favorito é " + hobby + ".");
-        }
-    </script>
-
-    <h2>Primeiro Contato com JavaScript</h2>
-     <br>
-    
-    <button onclick="Informacao()">Clique aqui</button>
-
-    <script>
-        function Informacao() {
-
-            let nome = prompt("Digite seu nome: ")
-            alert("Bem-Vindo, " + nome + "! Vamos INFORMAR seus Dados.");
-
-            let salarioMensal = parseFloat(prompt("Digite seu salário mensal: "))
-            alert("Seu salário é R$ " + salarioMensal.toFixed(2));
-
-            let alimentacao = parseFloat(prompt("Digite seu gasto com alimentação mensal: "))
-            alert("Seu gasto com alimentação é R$ " + alimentacao.toFixed(2));
-
-            let saldo = salarioMensal - alimentacao;
-            alert("Seu saldo final é R$ " + saldo.toFixed(2) + ". ");
-
-        }
-    </script>
+        <div class="receipt-footer">
+            <button class="btn-reload" onclick="location.reload()">Novo Abastecimento</button>
+        </div>
+    </div>
 
     <script>
-
+       
         let modelo = prompt("Informe o modelo do veículo:");
 
         let placa = prompt("Informe a placa do veículo:");
 
         let tipoCombustivel = prompt("Informe o tipo de combustível (ETANOL ou GASOLINA):");
-
+        
         let valorLitro = parseFloat(prompt("Informe o valor do litro (em R$):").replace(",", "."));
 
         let qtdLitros = parseFloat(prompt("Informe a quantidade de litros abastecida:").replace(",", "."));
@@ -78,21 +70,24 @@
         let valorTotal = valorLitro * qtdLitros;
 
         let imposto = valorTotal * 0.25;
-        
-        let agora = new Date();
 
+        let agora = new Date();
+        
         let dataHoraFormatada = agora.toLocaleString("pt-BR");
 
-        let relatorio = "******** RELATÓRIO DE ABASTECIMENTO ********\n\n" +
-            "Data e Hora do abastecimento: " + dataHoraFormatada + "\n" +
-            "Modelo do Veículo: " + modelo + "\n" +
-            "Placa do Veículo: " + placa + "\n" +
-            "Tipo do Combustível: " + tipoCombustivel.toUpperCase() + "\n" +
-            "Valor do Litro: R$ " + valorLitro.toFixed(2) + "\n" +
-            "Quantidade de litros abastecidos: " + qtdLitros.toFixed(2) + " L\n" +
-            "Valor Total a Pagar: R$ " + valorTotal.toFixed(2) + "\n\n" +
-            "Observação: Valor do Imposto (25%): R$ " + imposto.toFixed(2);
-        alert(relatorio);
+        function formatarMoeda(valor) {
+            return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        document.getElementById("dataHora").innerText = dataHoraFormatada;
+        document.getElementById("modelo").innerText = modelo || "Não informado";
+        document.getElementById("placa").innerText = (placa || "Não informada").toUpperCase();
+        document.getElementById("combustivel").innerText = (tipoCombustivel || "Não informado").toUpperCase();
+        document.getElementById("valorLitro").innerText = formatarMoeda(valorLitro);
+        document.getElementById("qtdLitros").innerText = qtdLitros.toFixed(2) + " L";
+        document.getElementById("valorTotal").innerText = formatarMoeda(valorTotal);
+        document.getElementById("imposto").innerText = "Observação: Valor do Imposto (25%): " + formatarMoeda(imposto);
     </script>
+
 </body>
 </html>
